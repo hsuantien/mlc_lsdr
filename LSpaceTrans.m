@@ -7,9 +7,9 @@ DataPath = 'data';
 [testing_size, feature_num]=size(x_tt);
 
 %encoding scheme
-%for Binary Relevance w/ random discard
+%for Binary Relevance with Random Discarding
 if (strcmp(alg, 'br'))
-	[Ytr, Ytt, perm]=random_discard(y_tr, y_tt, m);
+  [Ytr, Ytt, perm] = br_encode(y_tr, y_tt, m);
 %for Principle Label Space Transformation
 elseif (strcmp(alg, 'plst'))
 	[Ytr, Ytt, V_prime]=svd_project(y_tr, y_tt, m);

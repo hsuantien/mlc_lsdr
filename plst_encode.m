@@ -1,11 +1,6 @@
-function[Ytr, Ytt, V_prime]=svd_project(y_tr, y_tt, m)
-%dimension reduction: svd
-[U,S,V] = svd(y_tr,0);
+function [Ytr, Ytt, Vm] = svd_project(y_tr, y_tt, m)
 
-S_prime=S(:, 1:m);
-V_prime=V(:,1:m);
-
-Ytr=U*S_prime;
-Ytt=y_tt*V_prime;	
-
-return
+[U, S, V] = svd(y_tr, 0);
+Vm = V(:,1:m);
+Ytr = y_tr*Vm;
+Ytt = y_tt*Vm;

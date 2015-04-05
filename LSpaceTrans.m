@@ -12,7 +12,7 @@ if (strcmp(alg, 'br'))
   [Ytr, Ytt, perm] = br_encode(y_tr, y_tt, m);
 %for Principle Label Space Transformation
 elseif (strcmp(alg, 'plst'))
-	[Ytr, Ytt, V_prime]=svd_project(y_tr, y_tt, m);
+  [Ytr, Ytt, Vm] = plst_encode(y_tr, y_tt, m);
 %for Compressive Sensing using hadamard and CoSaMP
 elseif (strcmp(alg, 'cs'))
 	[Ytr, Ytt, A]=compress_hadamard(y_tr, y_tt, m);

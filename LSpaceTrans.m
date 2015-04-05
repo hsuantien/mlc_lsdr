@@ -1,8 +1,8 @@
 function[]=LSpaceTrans(DataSet, m, k, alg)
-FilePathPrefix = '/home/farbound/MultiLabel_exp/llst/';
+DataPath = 'data';
 
 %read dataset
-[y_tr, x_tr, y_tt, x_tt]=read_dataset(DataSet, FilePathPrefix);
+[y_tr, x_tr, y_tt, x_tt]=read_dataset(DataSet, DataPath);
 [training_size, label_size]=size(y_tr);
 [testing_size, feature_num]=size(x_tt);
 

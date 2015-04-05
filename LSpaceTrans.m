@@ -30,7 +30,7 @@ if (strcmp(alg, 'br'))
 	G_tt=sign(G_tt);
 %for Principle Label Space Transformation
 elseif (strcmp(alg, 'plst'))
-	G_tt=G_prime*V_prime';
+	G_tt=G_prime*Vm';
 	G_tt=sign(G_tt);
 %for Compressive Sensing using hadamard and CoSaMP
 elseif (strcmp(alg, 'cs'))

@@ -1,7 +1,5 @@
-function [w] = ridgereg(y_tr, x_tr)
+function [ww] = ridgereg(Y, X)
 
-  [N, K] = size(y_tr);
-
-  X = [ones(N, 1) x_tr];
-  w = ridgereg_pinv(X) * y_tr;
-
+  [N, K] = size(Y);
+  XX = [ones(N, 1) X]; %pad with 1 in xx_1 so ww_1 corresponds to bias
+  ww = ridgereg_pinv(XX) * Y;

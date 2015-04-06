@@ -2,8 +2,8 @@ function LSpaceTrans(DataSet, m, k, alg)
 
 %read dataset
 [y_tr, x_tr, y_tt, x_tt] = read_dataset(DataSet);
-[training_size, label_size]=size(y_tr);
-[testing_size, feature_num]=size(x_tt);
+[training_size, label_size] = size(y_tr);
+[testing_size, feature_num] = size(x_tt);
 
 %encoding scheme
 %for Binary Relevance with Random Discarding

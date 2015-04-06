@@ -5,22 +5,22 @@ function LSpaceTrans(DataSet, m, k, alg)
   [N, K] = size(Y);
   [Nt, d] = size(Xt);
 
-%encoding scheme
-%for Binary Relevance with Random Discarding
-if (strcmp(alg, 'br'))
-  [Ytr, Ytt, perm] = br_encode(Y, Yt, m);
-%for Principle Label Space Transformation
-elseif (strcmp(alg, 'plst'))
-  [Ytr, Ytt, Vm] = plst_encode(Y, Yt, m);
-%for Compressive Sensing using hadamard and CoSaMP
-elseif (strcmp(alg, 'cs'))
-	[Ytr, Ytt, A]=compress_hadamard(Y, Yt, m);
-else
-	fprintf(1, 'ERROR, unrecognized coding scheme');
-end
-
+  %encoding scheme
+  %for Binary Relevance with Random Discarding
+  if (strcmp(alg, 'br'))
+    [Z, Zt, perm] = br_encode(Y, Yt, m);
+  %for Principle Label Space Transformation
+  elseif (strcmp(alg, 'plst'))
+    [Z, Zt, Vm] = plst_encode(Y, Yt, m);
+  %for Compressive Sensing using hadamard and CoSaMP
+  elseif (strcmp(alg, 'cs'))
+    [Z, Zt, A]=compress_hadamard(Y, Yt, m);
+  else
+    fprintf(1, 'ERROR, unrecognized coding scheme');
+  end
+  
 %OVA
-ww = ridgereg(Ytr, X, 0.1);
+ww = ridgereg(Z, X, 0.1);
 G_prime = [one(testing_size, 1) Xt] * ww;
 
 %decoding scheme

@@ -1,8 +1,7 @@
-function[]=LSpaceTrans(DataSet, m, k, alg)
-DataPath = 'data';
+function LSpaceTrans(DataSet, m, k, alg)
 
 %read dataset
-[y_tr, x_tr, y_tt, x_tt]=read_dataset(DataSet, DataPath);
+[y_tr, x_tr, y_tt, x_tt] = read_dataset(DataSet);
 [training_size, label_size]=size(y_tr);
 [testing_size, feature_num]=size(x_tt);
 
@@ -26,8 +25,8 @@ end
 %decoding scheme
 %for Binary Relevance w/ random discard
 if (strcmp(alg, 'br'))
-	[G_tt]=random_discard_reconst(G_prime, perm, label_size);
-	G_tt=sign(G_tt);
+  [G_tt]=random_discard_reconst(G_prime, perm, label_size);
+  G_tt=sign(G_tt);
 %for Principle Label Space Transformation
 elseif (strcmp(alg, 'plst'))
 	G_tt=G_prime*Vm';

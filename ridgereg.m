@@ -1,4 +1,4 @@
-function [G_tt]=OVA_linreg(y_tr, y_tt, x_tr, x_tt)
+function [G_tt] = ridgereg(y_tr, x_tr, y_tt, x_tt)
 
 	[training_size, label_size]=size(y_tr);
 	[testing_size, feature_num]=size(x_tt);

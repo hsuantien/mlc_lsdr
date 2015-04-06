@@ -20,7 +20,7 @@ else
 end
 
 %OVA
-[G_prime]=OVA_linreg(Ytr, Ytt, x_tr, x_tt);
+[G_prime]=ridgereg(Ytr, x_tr, Ytt, x_tt);
 
 %decoding scheme
 %for Binary Relevance w/ random discard

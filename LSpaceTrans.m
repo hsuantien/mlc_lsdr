@@ -11,7 +11,7 @@ function LSpaceTrans(DataSet, M, k, alg)
     [Z, Zt, Vm] = br_encode(Y, Yt, M);
   %for Principle Label Space Transformation
   elseif (strcmp(alg, 'plst'))
-    [Z, Zt, Vm] = plst_encode(Y, Yt, m);
+    [Z, Zt, Vm] = plst_encode(Y, Yt, M);
   %for Compressive Sensing using hadamard and CoSaMP
   elseif (strcmp(alg, 'cs'))
     [Z, Zt, A]=compress_hadamard(Y, Yt, m);

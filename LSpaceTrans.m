@@ -8,7 +8,7 @@ function LSpaceTrans(DataSet, M, k, alg)
   %encoding scheme
   %for Binary Relevance with Random Discarding
   if (strcmp(alg, 'br'))
-    [Z, Zt, perm] = br_encode(Y, Yt, M);
+    [Z, Zt, Vm] = br_encode(Y, Yt, M);
   %for Principle Label Space Transformation
   elseif (strcmp(alg, 'plst'))
     [Z, Zt, Vm] = plst_encode(Y, Yt, m);
@@ -23,11 +23,10 @@ function LSpaceTrans(DataSet, M, k, alg)
   ww = ridgereg(Z, X, 0.1);
   Zt_pred = [ones(Nt, 1) Xt] * ww;
 
-%decoding scheme
-%for Binary Relevance w/ random discard
-if (strcmp(alg, 'br'))
-  [G_tt]=random_discard_reconst(Zt_pred, perm, K);
-  G_tt=sign(G_tt);
+  %decoding scheme
+  %for Binary Relevance with Random Discarding
+  if (strcmp(alg, 'br'))
+    Yt_pred = sign(br_decode(Zt_pred, Vm));
 %for Principle Label Space Transformation
 elseif (strcmp(alg, 'plst'))
 	G_tt=Zt_pred*Vm';
@@ -40,6 +39,6 @@ else
 	fprintf(1, 'ERROR, unrecognized coding scheme');
 end
 
-HL=sum(sum(abs((sign(G_tt)+1)/2-(y_tt+1)/2))/Nt)/K
+HL=sum(sum(abs((sign(Yt_pred)+1)/2-(Yt+1)/2))/Nt)/K
 save pred_result G_tt -ASCII
 return

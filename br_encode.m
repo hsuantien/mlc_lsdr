@@ -1,6 +1,6 @@
 function [Ytr, Ytt, perm] = br_encode(Y, Yt, m)
 
-[training_size, label_size]=size(Y);
+  [N, K] = size(Y);
 perm1 = 1:label_size;
 perm2 = randperm(label_size);
 perm = [perm1; perm2];

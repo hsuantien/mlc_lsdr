@@ -19,9 +19,9 @@ function LSpaceTrans(DataSet, m, k, alg)
     fprintf(1, 'ERROR, unrecognized coding scheme');
   end
   
-%OVA
-ww = ridgereg(Z, X, 0.1);
-G_prime = [ones(Nt, 1) Xt] * ww;
+  %ridge regression
+  ww = ridgereg(Z, X, 0.1);
+  G_prime = [ones(Nt, 1) Xt] * ww;
 
 %decoding scheme
 %for Binary Relevance w/ random discard

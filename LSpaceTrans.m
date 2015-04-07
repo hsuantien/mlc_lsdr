@@ -21,7 +21,7 @@ function LSpaceTrans(DataSet, m, k, alg)
   
 %OVA
 ww = ridgereg(Z, X, 0.1);
-G_prime = [one(testing_size, 1) Xt] * ww;
+G_prime = [one(Nt, 1) Xt] * ww;
 
 %decoding scheme
 %for Binary Relevance w/ random discard
@@ -40,6 +40,6 @@ else
 	fprintf(1, 'ERROR, unrecognized coding scheme');
 end
 
-HL=sum(sum(abs((sign(G_tt)+1)/2-(y_tt+1)/2))/testing_size)/label_size
+HL=sum(sum(abs((sign(G_tt)+1)/2-(y_tt+1)/2))/Nt)/label_size
 save pred_result G_tt -ASCII
 return

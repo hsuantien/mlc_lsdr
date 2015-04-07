@@ -1,4 +1,4 @@
-function LSpaceTrans(DataSet, m, k, alg)
+function LSpaceTrans(DataSet, M, k, alg)
 
   %read dataset
   [Y, X, Yt, Xt] = read_dataset(DataSet);
@@ -8,7 +8,7 @@ function LSpaceTrans(DataSet, m, k, alg)
   %encoding scheme
   %for Binary Relevance with Random Discarding
   if (strcmp(alg, 'br'))
-    [Z, Zt, perm] = br_encode(Y, Yt, m);
+    [Z, Zt, perm] = br_encode(Y, Yt, M);
   %for Principle Label Space Transformation
   elseif (strcmp(alg, 'plst'))
     [Z, Zt, Vm] = plst_encode(Y, Yt, m);

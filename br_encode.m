@@ -1,11 +1,9 @@
-function [Ytr, Ytt, perm] = br_encode(Y, Yt, m)
+function [Z, Zt, Vm] = br_encode(Y, Yt, M)
 
   [N, K] = size(Y);
-perm1 = 1:label_size;
-perm2 = randperm(label_size);
-perm = [perm1; perm2];
-Ytr = Y(:, perm2);
-Ytt = Yt(:, perm2);
-Ytr=Ytr(:,1:m);
-Ytt=Ytt(:,1:m);
+  Vm = speye(K);
+  idx = randperm(1:K);
+  Vm = Vm(idx, 1:M);
+  Z = Y * Vm;
+  Zt = Yt * Vm;
 

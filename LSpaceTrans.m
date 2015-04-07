@@ -9,7 +9,7 @@ function LSpaceTrans(DataSet, M, k, alg)
   %for Binary Relevance with Random Discarding
   if (strcmp(alg, 'br'))
     [Z, Zt, Vm] = br_encode(Y, Yt, M);
-  %for Principle Label Space Transformation
+  %for Principal Label Space Transformation
   elseif (strcmp(alg, 'plst'))
     [Z, Zt, Vm, shift] = plst_encode(Y, Yt, M);
   %for Compressive Sensing using hadamard and CoSaMP
@@ -27,7 +27,7 @@ function LSpaceTrans(DataSet, M, k, alg)
   %for Binary Relevance with Random Discarding
   if (strcmp(alg, 'br'))
     [Yt_pred, ~] = round_linear_decode(Zt_pred, Vm);
-  %for Principle Label Space Transformation
+  %for Principal Label Space Transformation
   elseif (strcmp(alg, 'plst'))
     [Yt_pred, ~] = round_linear_decode(Zt_pred, Vm, shift);
 %for Compressive Sensing using hadamard and CoSaMP

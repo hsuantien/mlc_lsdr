@@ -26,7 +26,7 @@ G_prime = [ones(Nt, 1) Xt] * ww;
 %decoding scheme
 %for Binary Relevance w/ random discard
 if (strcmp(alg, 'br'))
-  [G_tt]=random_discard_reconst(G_prime, perm, label_size);
+  [G_tt]=random_discard_reconst(G_prime, perm, K);
   G_tt=sign(G_tt);
 %for Principle Label Space Transformation
 elseif (strcmp(alg, 'plst'))
@@ -40,6 +40,6 @@ else
 	fprintf(1, 'ERROR, unrecognized coding scheme');
 end
 
-HL=sum(sum(abs((sign(G_tt)+1)/2-(y_tt+1)/2))/Nt)/label_size
+HL=sum(sum(abs((sign(G_tt)+1)/2-(y_tt+1)/2))/Nt)/K
 save pred_result G_tt -ASCII
 return

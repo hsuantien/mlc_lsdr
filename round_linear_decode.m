@@ -1,5 +1,12 @@
-function [Y_pred, Y_real] = round_linear_decode(Z_pred, Vm)
+function [Y_pred, Y_real] = round_linear_decode(Z_pred, Vm, shift)
 
-  Y_real = Z_pred * Vm';
+  N = size(Z_pred, 1);
+  K = size(Vm, 1);
+
+  if nargin < 3
+    shift = zeros(1, K);
+  end
+
+  Y_real = Z_pred * Vm' + repmat(shift, N, 1);
   Y_pred = sign(Y_real);
 

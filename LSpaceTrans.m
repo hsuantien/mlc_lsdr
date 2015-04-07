@@ -11,7 +11,7 @@ function LSpaceTrans(DataSet, M, k, alg)
     [Z, Zt, Vm] = br_encode(Y, Yt, M);
   %for Principle Label Space Transformation
   elseif (strcmp(alg, 'plst'))
-    [Z, Zt, Vm] = plst_encode(Y, Yt, M);
+    [Z, Zt, Vm, shift] = plst_encode(Y, Yt, M);
   %for Compressive Sensing using hadamard and CoSaMP
   elseif (strcmp(alg, 'cs'))
     [Z, Zt, A]=compress_hadamard(Y, Yt, m);
@@ -29,7 +29,7 @@ function LSpaceTrans(DataSet, M, k, alg)
     [Yt_pred, ~] = round_linear_decode(Zt_pred, Vm);
   %for Principle Label Space Transformation
   elseif (strcmp(alg, 'plst'))
-    [Yt_pred, ~] = round_linear_decode(Zt_pred, Vm);
+    [Yt_pred, ~] = round_linear_decode(Zt_pred, Vm, shift);
 %for Compressive Sensing using hadamard and CoSaMP
 elseif (strcmp(alg, 'cs'))
 	[G_tt]=cosamp(A,Zt_pred,k);

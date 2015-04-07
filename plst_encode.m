@@ -1,6 +1,6 @@
-function [Ytr, Ytt, Vm] = svd_project(y_tr, y_tt, m)
+function [Z, Zt, Vm] = svd_project(Y, Yt, m)
 
-[U, S, V] = svd(y_tr, 0);
+[U, S, V] = svd(Y, 0);
 Vm = V(:,1:m);
-Ytr = y_tr*Vm;
-Ytt = y_tt*Vm;
+Z = Y * Vm;
+Zt = Yt * Vm;

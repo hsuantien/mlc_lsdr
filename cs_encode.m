@@ -1,10 +1,10 @@
-function[Ytr, Ytt, A]=compress_hadamard(y_tr, y_tt, m, FilePath)
+function [Z, Zt, A] = compress_hadamard(Y, Yt, m, FilePath)
 %dimension reduction: hadamard
-[training_size, label_size]=size(y_tr);
+[training_size, label_size]=size(Y);
 hadamard_n=2^(ceil(log2(label_size)));
 A = generate_rand_hadamard(m,label_size,hadamard_n);
-Ytr=A*y_tr';
-Ytt=A*y_tt';
-Ytr=Ytr';
-Ytt=Ytt';
-return
+Z=A*Y';
+Zt=A*Yt';
+Z=Z';
+Zt=Zt';
+

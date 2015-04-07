@@ -26,10 +26,10 @@ function LSpaceTrans(DataSet, M, k, alg)
   %decoding scheme
   %for Binary Relevance with Random Discarding
   if (strcmp(alg, 'br'))
-    [Yt_pred, ~] = round_linear_decode(Zt_pred, Vm));
+    [Yt_pred, ~] = round_linear_decode(Zt_pred, Vm);
   %for Principle Label Space Transformation
   elseif (strcmp(alg, 'plst'))
-    [Yt_pred, ~] = round_linear_decode(Zt_pred, Vm));
+    [Yt_pred, ~] = round_linear_decode(Zt_pred, Vm);
 %for Compressive Sensing using hadamard and CoSaMP
 elseif (strcmp(alg, 'cs'))
 	[G_tt]=cosamp(A,Zt_pred,k);
@@ -39,5 +39,5 @@ else
 end
 
 HL=sum(sum(abs((sign(Yt_pred)+1)/2-(Yt+1)/2))/Nt)/K
-save pred_result G_tt -ASCII
-return
+%save pred_result G_tt -ASCII
+%return

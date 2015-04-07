@@ -21,7 +21,7 @@ function LSpaceTrans(DataSet, m, k, alg)
   
 %OVA
 ww = ridgereg(Z, X, 0.1);
-G_prime = [one(Nt, 1) Xt] * ww;
+G_prime = [ones(Nt, 1) Xt] * ww;
 
 %decoding scheme
 %for Binary Relevance w/ random discard

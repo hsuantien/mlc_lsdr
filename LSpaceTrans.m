@@ -12,6 +12,8 @@ function [Yt_pred, HL] = LSpaceTrans(DataSet, M, alg)
   %for Principal Label Space Transformation
   elseif (strcmp(alg, 'plst'))
     [Z, Zt, Vm, shift] = plst_encode(Y, Yt, M);
+  elseif (strcmp(alg, 'cplst'))
+    [Z, Zt, Vm, shift] = cplst_encode(Y, Yt, M, X, 0.1);
   else
     fprintf(1, 'ERROR, unrecognized coding scheme');
     return;
@@ -27,6 +29,8 @@ function [Yt_pred, HL] = LSpaceTrans(DataSet, M, alg)
     [Yt_pred, ~] = round_linear_decode(Zt_pred, Vm);
   %for Principal Label Space Transformation
   elseif (strcmp(alg, 'plst'))
+    [Yt_pred, ~] = round_linear_decode(Zt_pred, Vm, shift);
+  elseif (strcmp(alg, 'cplst'))
     [Yt_pred, ~] = round_linear_decode(Zt_pred, Vm, shift);
   else
     fprintf(1, 'ERROR, unrecognized coding scheme');

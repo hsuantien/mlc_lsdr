@@ -1,7 +1,7 @@
 Multi-Label Classification with Label Space Dimension Reduction
 ======
 
-The program consists of three linear label space transformation approaches: Binary Relevance with Random Discarding (BR), Principle Label Space Transformation (PLST), and Conditional Principal Label Space Transformation (CPLST). The base learner used in all approaches is regularized linear regression with a fixed regularization parameter. Please see the usage below.
+The program consists of three linear label space transformation approaches: Binary Relevance with Random Discarding (BR), Principal Label Space Transformation (PLST), and Conditional Principal Label Space Transformation (CPLST). The base learner used in all approaches is regularized linear regression with a fixed regularization parameter. Please see the usage below.
 
 BR and PLST are compared in
 

@@ -1,4 +1,5 @@
 function [Yt_pred, HL] = LSpaceTrans(DataSet, M, alg)
+  lambda = 0.1;
 
   %read dataset
   [Y, X, Yt, Xt] = read_dataset(DataSet);
@@ -12,15 +13,16 @@ function [Yt_pred, HL] = LSpaceTrans(DataSet, M, alg)
   %for Principal Label Space Transformation
   elseif (strcmp(alg, 'plst'))
     [Z, Zt, Vm, shift] = plst_encode(Y, Yt, M);
+  %for Conditional Principal Label Space Transformation
   elseif (strcmp(alg, 'cplst'))
-    [Z, Zt, Vm, shift] = cplst_encode(Y, Yt, M, X, 0.1);
+    [Z, Zt, Vm, shift] = cplst_encode(Y, Yt, M, X, lambda);
   else
     fprintf(1, 'ERROR, unrecognized coding scheme');
     return;
   end
   
   %ridge regression
-  ww = ridgereg(Z, X, 0.1);
+  ww = ridgereg(Z, X, lambda);
   Zt_pred = [ones(Nt, 1) Xt] * ww;
 
   %decoding scheme
@@ -30,6 +32,7 @@ function [Yt_pred, HL] = LSpaceTrans(DataSet, M, alg)
   %for Principal Label Space Transformation
   elseif (strcmp(alg, 'plst'))
     [Yt_pred, ~] = round_linear_decode(Zt_pred, Vm, shift);
+  %for Conditional Principal Label Space Transformation
   elseif (strcmp(alg, 'cplst'))
     [Yt_pred, ~] = round_linear_decode(Zt_pred, Vm, shift);
   else

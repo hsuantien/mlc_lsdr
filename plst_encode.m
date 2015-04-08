@@ -1,4 +1,4 @@
-function [Z, Zt, Vm, shift] = plst_encode(Y, Yt, m)
+function [Z, Zt, Vm, shift] = plst_encode(Y, Yt, M)
 
   shift = mean(Y);
 
@@ -8,6 +8,6 @@ function [Z, Zt, Vm, shift] = plst_encode(Y, Yt, m)
   Ytshift = Yt - repmat(shift, Nt, 1);
 
   [~, ~, V] = svd(Yshift, 0);
-  Vm = V(:, 1:m);
+  Vm = V(:, 1:M);
   Z = Yshift * Vm;
   Zt = Ytshift * Vm;

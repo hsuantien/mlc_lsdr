@@ -1,4 +1,4 @@
-function [Z, Zt, Vm, shift] = cplst_encode(Y, Yt, m, X, lambda)
+function [Z, Zt, Vm, shift] = cplst_encode(Y, Yt, M, X, lambda)
 
   shift = mean(Y);
 
@@ -8,6 +8,6 @@ function [Z, Zt, Vm, shift] = cplst_encode(Y, Yt, m, X, lambda)
   Ytshift = Yt - repmat(shift, Nt, 1);
 
   [~, ~, V] = svd(Yshift' * ridgereg_hat(X, lambda) * Yshift, 0);
-  Vm = V(:, 1:m);
+  Vm = V(:, 1:M);
   Z = Yshift * Vm;
   Zt = Ytshift * Vm;

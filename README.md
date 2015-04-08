@@ -1,9 +1,9 @@
 Multi-Label Classification with Label Space Dimension Reduction
 ======
 
-The program consists of four linear label space transformation approaches: Binary Relevance with Random Discarding (BR), Principle Label Space Transformation (PLST), Compressive Sensing (CS), and Conditional Principal Label Space Transformation (CPLST). The base learner used in all approaches is regularized linear regression with a fixed regularization parameter. Please see the usage below.
+The program consists of three linear label space transformation approaches: Binary Relevance with Random Discarding (BR), Principle Label Space Transformation (PLST), and Conditional Principal Label Space Transformation (CPLST). The base learner used in all approaches is regularized linear regression with a fixed regularization parameter. Please see the usage below.
 
-BR, PLST and CS are compared in
+BR and PLST are compared in
 
 Farbound Tai and Hsuan-Tien Lin. Multilabel classification with principal label space transformation. Neural Computation, 24(9):2508--2542, September 2012.
 
@@ -17,5 +17,5 @@ If there are any questions, please feel free to contact the corresponding author
 
 Hsuan-Tien Lin, htlin@csie.ntu.edu.tw
 
-The corresponding author thanks his co-authors of the papers, especially Farbound Tai who contributed significantly to the layout of the program.
+The corresponding author thanks his co-authors of the papers, especially Farbound Tai who contributed significantly to the initial layout of the program.
 

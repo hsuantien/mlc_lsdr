@@ -3,4 +3,4 @@ function H = ridgereg_hat(X, lambda)
 % needs lambda > 0
 % See also ridgereg_pinv
 
-  H = X * ridgereg_pinv(X, lambda)
+  H = X * ridgereg_pinv(X, lambda);

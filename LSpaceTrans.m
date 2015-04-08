@@ -1,4 +1,4 @@
-function LSpaceTrans(DataSet, M, k, alg)
+function [Yt_pred, HL] = LSpaceTrans(DataSet, M, alg)
 
   %read dataset
   [Y, X, Yt, Xt] = read_dataset(DataSet);
@@ -14,6 +14,7 @@ function LSpaceTrans(DataSet, M, k, alg)
     [Z, Zt, Vm, shift] = plst_encode(Y, Yt, M);
   else
     fprintf(1, 'ERROR, unrecognized coding scheme');
+    return;
   end
   
   %ridge regression
@@ -29,8 +30,6 @@ function LSpaceTrans(DataSet, M, k, alg)
     [Yt_pred, ~] = round_linear_decode(Zt_pred, Vm, shift);
   else
     fprintf(1, 'ERROR, unrecognized coding scheme');
-end
-
-HL=sum(sum(abs((sign(Yt_pred)+1)/2-(Yt+1)/2))/Nt)/K
-%save pred_result G_tt -ASCII
-%return
+    return;
+  end
+  HL = sum(sum(Yt_pred ~= Yt)) / Nt / K;

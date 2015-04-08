@@ -1,14 +1,9 @@
-function [Z, Zt, A] = cs_encode(Y, Yt, M)
+function [Z, Zt, Vm] = cs_encode(Y, Yt, M)
 
-  [N, K]=size(Y);
+  [N, K] = size(Y);
   Kh = 2^(ceil(log2(K)));
-A = generate_rand_hadamard(m,K, Kh);
-Z = Y * A';
-Zt = Yt * A';
-
-function [A]=generate_rand_hadamard(m,K,Kh)
-H=hadamard(Kh);
-p = randperm(Kh);
-A = H(1:K, p(1:M))
-
-
+  H = hadamard(Kh);
+  p = randperm(Kh);
+  Vm = H(1:K, p(1:M))
+  Z = Y * Vm;
+  Zt = Yt * Vm';

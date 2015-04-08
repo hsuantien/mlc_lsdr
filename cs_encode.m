@@ -7,12 +7,8 @@ Z = Y * A';
 Zt = Yt * A';
 
 function [A]=generate_rand_hadamard(m,K,Kh)
-A=[];
 H=hadamard(Kh);
-p=randperm(Kh);
+p = randperm(Kh);
+A = H(1:K, p(1:M))
 
-for i=1:1:m
-    A=[A; H(p(i),1:K)];
-end
-return
 

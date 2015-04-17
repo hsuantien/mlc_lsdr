@@ -1,10 +1,19 @@
 function [Yt_pred, HL] = LSpaceTrans(DataSet, M, alg)
+  if (isa(M, 'char'))
+    M = str2num(M);
+  end
   lambda = 0.1;
 
   %read dataset
   [Y, X, Yt, Xt] = read_dataset(DataSet);
   [N, K] = size(Y);
   [Nt, d] = size(Xt);
+
+  % {0,1} -> {-1,1}
+  if sum(sum(Y>0)) == sum(sum(Y))
+    Y = 2*Y - 1;
+    Yt = 2*Yt - 1;
+  end
 
   %encoding scheme
   %for Binary Relevance with Random Discarding
@@ -16,6 +25,10 @@ function [Yt_pred, HL] = LSpaceTrans(DataSet, M, alg)
   %for Conditional Principal Label Space Transformation
   elseif (strcmp(alg, 'cplst'))
     [Z, Zt, Vm, shift] = cplst_encode(Y, Yt, M, X, lambda);
+  elseif (strcmp(alg, 'faie'))
+    [Z, recover] = FaIE_encode(X, Y, M);
+  elseif (strcmp(alg, 'cssp'))
+    [Z, recover] = cssp_encode(Y,M);
   else
     fprintf(1, 'ERROR, unrecognized coding scheme');
     return;
@@ -35,8 +48,15 @@ function [Yt_pred, HL] = LSpaceTrans(DataSet, M, alg)
   %for Conditional Principal Label Space Transformation
   elseif (strcmp(alg, 'cplst'))
     [Yt_pred, ~] = round_linear_decode(Zt_pred, Vm, shift);
+  elseif (strcmp(alg, 'faie'))
+    [Yt_pred, ~] = FaIE_decode(Zt_pred, recover);
+  elseif (strcmp(alg, 'cssp'))
+    [Yt_pred, ~] = cssp_decode(Zt_pred, recover);
   else
     fprintf(1, 'ERROR, unrecognized coding scheme');
     return;
   end
+  evaluate(Yt_pred, Yt);
+  %HL = 0;
   HL = sum(sum(Yt_pred ~= Yt)) / Nt / K;
+  disp(['HL: ' num2str(HL)]); 

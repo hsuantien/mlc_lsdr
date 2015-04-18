@@ -25,8 +25,10 @@ function [Yt_pred, HL] = LSpaceTrans(DataSet, M, alg)
   %for Conditional Principal Label Space Transformation
   elseif (strcmp(alg, 'cplst'))
     [Z, Zt, Vm, shift] = cplst_encode(Y, Yt, M, X, lambda);
+  %for FaIE
   elseif (strcmp(alg, 'faie'))
     [Z, recover] = FaIE_encode(X, Y, M);
+  %for cssp
   elseif (strcmp(alg, 'cssp'))
     [Z, recover] = cssp_encode(Y,M);
   else
@@ -56,7 +58,7 @@ function [Yt_pred, HL] = LSpaceTrans(DataSet, M, alg)
     fprintf(1, 'ERROR, unrecognized coding scheme');
     return;
   end
-  evaluate(Yt_pred, Yt);
+  [~,~,~,HL,~] = evaluate(Yt_pred, Yt);
   %HL = 0;
-  HL = sum(sum(Yt_pred ~= Yt)) / Nt / K;
-  disp(['HL: ' num2str(HL)]); 
+  %HL = sum(sum(Yt_pred ~= Yt)) / Nt / K;
+  %disp(['HL: ' num2str(HL)]); 

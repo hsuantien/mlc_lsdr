@@ -1,5 +1,5 @@
-function [accuracy,ins_f,label_f,ham,zero_one]=evaluate(p,y)
-    e = 0.e
+function [accuracy,ins_f,label_f,ham,zero_one] = evaluate(p,y)
+    e = 0.0000001;
     m = size(y,1);
     tp = (p == y & p > e);
 

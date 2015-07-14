@@ -1,4 +1,4 @@
-function [Z, recover] = FaIE_encode(X, Y, M, lambda, alpha)
+function [Z, recover] = FaIEp_encode(X, Y, M, lambda, alpha)
     if (~exist('alpha', 'var'))
         alpha = 0.1;
     end

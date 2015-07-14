@@ -7,14 +7,7 @@ function [Z, recover] = FaIEp_encode(X, Y, M, lambda, alpha)
     Delta = ridgereg_hat(X, lambda);
 
     Omega = D1 + alpha * Delta;
-    [V,D] = eigs(Omega, M);
-    D = real(diag(D));
-    V = real(V);
-    scales = 1 ./ sqrt(diag(V'*V));
-    scales(isinf(scales) | isnan(scales)) = 1;
-    V  = V * sparse(diag(scales));              % normalize the eigenvectors
-    
-    [tmpY, tmpI] = sort(D, 'descend');    
-    Z = V(:, tmpI(1:M));
+    [V, D] = eigs(Omega, M);
+    Z = V;
 
     recover = Z' * Y;

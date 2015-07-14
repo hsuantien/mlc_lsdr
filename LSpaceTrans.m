@@ -55,7 +55,7 @@ function [Yt_pred, HL] = LSpaceTrans(DataSet, M, alg)
   elseif (strcmp(alg, 'faie'))
     [Yt_pred, ~] = FaIE_decode(Zt_pred, recover);
   elseif (strcmp(alg, 'faiep'))
-    [Yt_pred, ~] = FaIEp_decode(Zt_pred, recover);
+    [Yt_pred, ~] = round_linear_decode(Zt_pred, recover');
   elseif (strcmp(alg, 'cssp'))
     [Yt_pred, ~] = cssp_decode(Zt_pred, recover);
   else

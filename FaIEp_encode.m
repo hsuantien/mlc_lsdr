@@ -1,4 +1,4 @@
-function [Z, recover] = FaIEp_encode(X, Y, M, lambda, alpha)
+function [Z, Vm] = FaIEp_encode(X, Y, M, lambda, alpha)
     if (~exist('alpha', 'var'))
         alpha = 0.1;
     end
@@ -6,4 +6,4 @@ function [Z, recover] = FaIEp_encode(X, Y, M, lambda, alpha)
     Delta = ridgereg_hat(X, lambda);
     Omega = Y * Y' + alpha * Delta;
     [Z, D] = eigs(Omega, M);
-    recover = Z' * Y;
+    Vm = (Z' * Y)';

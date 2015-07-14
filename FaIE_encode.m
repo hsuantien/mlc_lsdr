@@ -1,4 +1,4 @@
-function [Z, recover] = FaIE_encode(X, Y, M, alpha,lambda)
+function [Z, recover] = FaIE_encode(X, Y, M, alpha, lambda)
     if (~exist('lambda', 'var'))
         lambda = 10^-6;
     end
@@ -8,13 +8,10 @@ function [Z, recover] = FaIE_encode(X, Y, M, alpha,lambda)
     end
 
     D1 = Y * Y';
-    %Delta = (X / (X' * X + 10^-6*eye(nFea))) * X';
     Delta = ridgereg_hat(X, lambda);
 
-    labelNum = M;
-
     Omega = D1 + alpha * Delta;
-    [V,D] = eigs(Omega, labelNum);
+    [V,D] = eigs(Omega, M);
     D = real(diag(D));
     V = real(V);
     scales = 1 ./ sqrt(diag(V'*V));
@@ -22,6 +19,6 @@ function [Z, recover] = FaIE_encode(X, Y, M, alpha,lambda)
     V  = V * sparse(diag(scales));              % normalize the eigenvectors
     
     [tmpY, tmpI] = sort(D, 'descend');    
-    Z = V(:, tmpI(1:labelNum));
+    Z = V(:, tmpI(1:M));
 
     recover = Z' * Y;

@@ -1,4 +1,4 @@
-function [Z, Vm] = FaIEp_encode(X, Y, M, lambda, alpha)
+function [Z, Vm] = FaIEp_encode(Y, M, X, lambda, alpha)
     if (~exist('alpha', 'var'))
         alpha = 0.1;
     end

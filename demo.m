@@ -3,6 +3,7 @@ HLbr = zeros(1, 14);
 HLplst = zeros(1, 14);
 HLcplst = zeros(1, 14);
 HLFaIE  = zeros(1,14);
+HLFaIEp  = zeros(1,14);
 HLCSSP  = zeros(1,14);
 
 for M=1:14
@@ -11,8 +12,11 @@ for M=1:14
   [~, HLplst(M)]  = LSpaceTrans('yeast', M, 'plst');
   [~, HLcplst(M)] = LSpaceTrans('yeast', M, 'cplst');
   [~, HLFaIE(M)]  = LSpaceTrans('yeast',M,'faie');
+  [~, HLFaIEp(M)]  = LSpaceTrans('yeast',M,'faiep');
   [~, HLCSSP(M)]  = LSpaceTrans('yeast',M,'cssp');
 end
+
+HLFaIE-HLFaIEp
 
 plot(1:M, HLbr,    'r',...
      1:M, HLplst,  'g',...

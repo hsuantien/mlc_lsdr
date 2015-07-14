@@ -27,9 +27,7 @@ function [Yt_pred, HL] = LSpaceTrans(DataSet, M, alg)
     [Z, Zt, Vm, shift] = cplst_encode(Y, Yt, M, X, lambda);
   %for FaIE
   elseif (strcmp(alg, 'faie'))
-    [Z, recover] = FaIE_encode(X, Y, M, lambda);
-  elseif (strcmp(alg, 'faiep'))
-    [Z, Vm] = FaIEp_encode(Y, M, X, lambda);
+    [Z, Vm] = FaIE_encode(Y, M, X, lambda);
   %for cssp
   elseif (strcmp(alg, 'cssp'))
     [Z, recover] = cssp_encode(Y, M);
@@ -52,9 +50,8 @@ function [Yt_pred, HL] = LSpaceTrans(DataSet, M, alg)
   %for Conditional Principal Label Space Transformation
   elseif (strcmp(alg, 'cplst'))
     [Yt_pred, ~] = round_linear_decode(Zt_pred, Vm, shift);
+  %for FaIE
   elseif (strcmp(alg, 'faie'))
-    [Yt_pred, ~] = FaIE_decode(Zt_pred, recover);
-  elseif (strcmp(alg, 'faiep'))
     [Yt_pred, ~] = round_linear_decode(Zt_pred, Vm);
   elseif (strcmp(alg, 'cssp'))
     [Yt_pred, ~] = cssp_decode(Zt_pred, recover);

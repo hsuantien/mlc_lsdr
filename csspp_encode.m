@@ -4,11 +4,10 @@ function [Z, recover] = csspp_encode(Y, M, lambda)
     end
     rand('seed', 1);
 
-    [~, ~ ,v] = svd(Y, 0);
-    vt = v';
-    vtk = vt(1:M,:);
-    p = sum(vtk,1)  ./ sum(sum(vtk,1),2);
-    sum_p = sum(p);
+    [~, ~ , V] = svd(Y, 0);
+    Vm = V(:, 1:M);
+    p = diag(Vm * Vm') ./ M;
+    sum_p = 1;
 
     C = [];
     used = zeros([1,size(Y,2)]);

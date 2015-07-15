@@ -1,4 +1,4 @@
-function [Z, Vm] = cssp_encode(Y, M, lambda)
+function [Z, Vm] = cssp_encode(Y, M)
   [N, K] = size(Y);
 
   %%R stands for right singular vectors
@@ -25,5 +25,5 @@ function [Z, Vm] = cssp_encode(Y, M, lambda)
 
   %%Vm stands for the decoding matrix
   %%named for consistency with PLST and CPLST  
-  Vm = (ridgereg_pinv(Z, lambda) * Y)';
+  Vm = (pinv(Z) * Y)';
 end

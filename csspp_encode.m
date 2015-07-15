@@ -4,7 +4,7 @@ function [Z, recover] = csspp_encode(Y, M, lambda)
     end
     rand('seed', 1);
 
-    [u,d,v] = svd(Y);
+    [~, ~ ,v] = svd(Y, 0);
     vt = v';
     vtk = vt(1:M,:);
     p = sum(vtk,1)  ./ sum(sum(vtk,1),2);

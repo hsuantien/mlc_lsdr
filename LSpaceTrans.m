@@ -24,7 +24,7 @@ function [Yt_pred, HL] = LSpaceTrans(DataSet, M, alg)
     [Z, Zt, Vm, shift] = plst_encode(Y, Yt, M);
   %for Conditional Principal Label Space Transformation
   elseif (strcmp(alg, 'cplst'))
-    [Z, Zt, Vm, shift] = cplst_encode(Y, Yt, M, X, lambda);
+    [Z, Vm, shift] = cplst_encode(Y, M, X, lambda);
   %for FaIE
   elseif (strcmp(alg, 'faie'))
     [Z, Vm] = FaIE_encode(Y, M, X, lambda);

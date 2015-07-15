@@ -10,7 +10,7 @@ function [Z, recover] = csspp_encode(Y, M, lambda)
   p = diag(Vm * Vm') ./ M;
   max_p = max(p);
   
-  C = [];
+  Z = zeros(N, M);
   used = zeros(1, K);
   for m = 1:M
     accept = false
@@ -20,11 +20,10 @@ function [Z, recover] = csspp_encode(Y, M, lambda)
       accept = (used(idx) == 0 && rand() * max_p <= p(idx))
     end
     used(idx) = 1;
-    C = [C Y(:, idx)];
+    Z(:, m) = Y(:, idx);
   end    
-  
-  Z = C;
-  recover = ridgereg_pinv(C, lambda) * Y;
+
+  recover = ridgereg_pinv(Z, lambda) * Y;
 %recover = pinv(C) * Y;
   
 end

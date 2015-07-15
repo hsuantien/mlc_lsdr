@@ -1,46 +1,30 @@
 function [Z, recover] = csspp_encode(Y, M, lambda)
-    if (~exist('lambda','var'))
-        lambda = 10^-6;
+  if (~exist('lambda','var'))
+    lambda = 10^-6;
+  end
+  rand('seed', 1);
+
+  [N, K] = size(Y);  
+  [~, ~ , V] = svd(Y, 0);
+  Vm = V(:, 1:M);
+  p = diag(Vm * Vm') ./ M;
+  max_p = max(p);
+  
+  C = [];
+  used = zeros(1, K);
+  for m = 1:M
+    accept = false
+    idx = 1;
+    while ~accept
+      idx = floor(rand() * K) + 1;
+      accept = (used(idx) == 0 && rand() * max_p <= p(idx))
     end
-    rand('seed', 1);
-
-    [~, ~ , V] = svd(Y, 0);
-    Vm = V(:, 1:M);
-    p = diag(Vm * Vm') ./ M;
-    sum_p = 1;
-
-    C = [];
-    used = zeros([1,size(Y,2)]);
-    while size(C,2) < M
-        idx = pick(p, used, sum_p);
-        used(idx) = 1;
-        sum_p = sum_p - p(idx);
-        C = [C Y(:,idx)];
-    end    
-
-    Z = C;
-    recover = ridgereg_pinv(C, lambda) * Y;
-    %recover = pinv(C) * Y;
-    
-end
-
-function idx = pick(p, used, sum_p)
-    len = size(p,2);
-    if abs(sum_p ) < 1e-24
-        idx = len;
-    else
-        idx = len;
-        s = 0;
-        r = rand();
-        for i = 1:len
-            if 1 ~= used(i) 
-                s = s + p(i);
-                if s/sum_p >= r
-                    idx = i;
-                    break;
-                end
-            end
-        end
-    end          
-
+    used(idx) = 1;
+    C = [C Y(:, idx)];
+  end    
+  
+  Z = C;
+  recover = ridgereg_pinv(C, lambda) * Y;
+%recover = pinv(C) * Y;
+  
 end

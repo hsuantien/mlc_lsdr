@@ -18,7 +18,7 @@ function [Yt_pred, HL] = LSpaceTrans(DataSet, M, alg)
   %encoding scheme
   %for Binary Relevance with Random Discarding
   if (strcmp(alg, 'br'))
-    [Z, Zt, Vm] = br_encode(Y, Yt, M);
+    [Z, Vm] = br_encode(Y, M);
   %for Principal Label Space Transformation
   elseif (strcmp(alg, 'plst'))
     [Z, Zt, Vm, shift] = plst_encode(Y, Yt, M);

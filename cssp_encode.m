@@ -2,6 +2,7 @@ function [Z, recover] = cssp_encode(Y, M, lambda)
     if (~exist('lambda','var'))
         lambda = 10^-6;
     end
+    rand('seed', 1);
 
     [u,d,v] = svd(Y);
     vt = v';

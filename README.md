@@ -17,9 +17,9 @@ The program consists of five linear label space transformation approaches.  The 
 
 * Column Subset Selection Problem (CSSP) is developed in
 
-  Bi, Wei, and James Kwok. "Efficient multi-label classification with many labels." Proceedings of the 30th International Conference on Machine Learning (ICML-13). 2013.
+  Wei Bi and James Kwok. Efficient Multi-label Classification with Many Labels. In Proceedings of the 30th International Conference on Machine Learning (ICML), June 2013.
 
-Please cite the these papers if you find the program useful.
+Please cite the these papers if you find corresponding parts of the program useful.
 
 If there are any questions, please feel free to contact the corresponding author of the first two papers at
 

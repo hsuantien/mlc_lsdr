@@ -1,47 +1,28 @@
-function [Z, recover] = cssp_encode(Y, M, lambda)
-    if (~exist('lambda','var'))
-        lambda = 10^-6;
+function [Z, Vm] = cssp_encode(Y, M, lambda)
+  [N, K] = size(Y);
+  %%R stands for right singular vectors
+  %%denoted V in the original paper
+  [~, ~ , R] = svd(Y, 0);
+  Rm = R(:, 1:M);
+  p = diag(Rm * Rm') ./ M;
+  max_p = max(p);
+  
+  %%Z stands for the codes to be learned
+  %%denoted C in the original paper
+  Z = zeros(N, M);
+  used = zeros(1, K);
+  for m = 1:M
+    idx = 1;
+    accept = false
+    while ~accept
+      idx = floor(rand() * K) + 1;
+      accept = (used(idx) == 0 && rand() * max_p <= p(idx));
     end
-    rand('seed', 1);
+    used(idx) = 1;
+    Z(:, m) = Y(:, idx);
+  end    
 
-    [u,d,v] = svd(Y);
-    vt = v';
-    vtk = vt(1:M,:);
-    p = sum(vtk,1)  ./ sum(sum(vtk,1),2);
-    sum_p = sum(p);
-
-    C = [];
-    used = zeros([1,size(Y,2)]);
-    while size(C,2) < M
-        idx = pick(p, used, sum_p);
-        used(idx) = 1;
-        sum_p = sum_p - p(idx);
-        C = [C Y(:,idx)];
-    end    
-
-    Z = C;
-    recover = ridgereg_pinv(C, lambda) * Y;
-    %recover = pinv(C) * Y;
-    
-end
-
-function idx = pick(p, used, sum_p)
-    len = size(p,2);
-    if abs(sum_p ) < 1e-24
-        idx = len;
-    else
-        idx = len;
-        s = 0;
-        r = rand();
-        for i = 1:len
-            if 1 ~= used(i) 
-                s = s + p(i);
-                if s/sum_p >= r
-                    idx = i;
-                    break;
-                end
-            end
-        end
-    end          
-
+  %%Vm stands for the decoding matrix
+  %%named for consistency with PLST and CPLST  
+  Vm = (ridgereg_pinv(Z, lambda) * Y)';
 end

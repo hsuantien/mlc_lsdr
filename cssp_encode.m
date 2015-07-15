@@ -1,5 +1,6 @@
 function [Z, Vm] = cssp_encode(Y, M, lambda)
   [N, K] = size(Y);
+
   %%R stands for right singular vectors
   %%denoted V in the original paper
   [~, ~ , R] = svd(Y, 0);
@@ -13,7 +14,7 @@ function [Z, Vm] = cssp_encode(Y, M, lambda)
   used = zeros(1, K);
   for m = 1:M
     idx = 1;
-    accept = false
+    accept = false;
     while ~accept
       idx = floor(rand() * K) + 1;
       accept = (used(idx) == 0 && rand() * max_p <= p(idx));

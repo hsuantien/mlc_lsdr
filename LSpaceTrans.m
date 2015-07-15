@@ -30,7 +30,7 @@ function [Yt_pred, HL] = LSpaceTrans(DataSet, M, alg)
     [Z, Vm] = FaIE_encode(Y, M, X, lambda);
   %for cssp
   elseif (strcmp(alg, 'cssp'))
-    [Z, Vm] = cssp_encode(Y, M);
+    [Z, Vm] = cssp_encode(Y, M, lambda);
   else
     fprintf(1, 'ERROR, unrecognized coding scheme');
     return;

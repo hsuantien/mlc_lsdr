@@ -1,4 +1,4 @@
-function [Z, recover] = csspp_encode(Y, M, lambda)
+function [Z, Vm] = csspp_encode(Y, M, lambda)
   if (~exist('lambda','var'))
     lambda = 10^-6;
   end
@@ -23,7 +23,7 @@ function [Z, recover] = csspp_encode(Y, M, lambda)
     Z(:, m) = Y(:, idx);
   end    
 
-  recover = ridgereg_pinv(Z, lambda) * Y;
+  Vm = (ridgereg_pinv(Z, lambda) * Y)';
 %recover = pinv(C) * Y;
   
 end

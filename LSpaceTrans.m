@@ -31,6 +31,8 @@ function [Yt_pred, HL] = LSpaceTrans(DataSet, M, alg)
   %for cssp
   elseif (strcmp(alg, 'cssp'))
     [Z, recover] = cssp_encode(Y, M);
+  elseif (strcmp(alg, 'csspp'))
+    [Z, recover] = csspp_encode(Y, M);
   else
     fprintf(1, 'ERROR, unrecognized coding scheme');
     return;
@@ -55,6 +57,8 @@ function [Yt_pred, HL] = LSpaceTrans(DataSet, M, alg)
     [Yt_pred, ~] = round_linear_decode(Zt_pred, Vm);
   elseif (strcmp(alg, 'cssp'))
     [Yt_pred, ~] = cssp_decode(Zt_pred, recover);
+  elseif (strcmp(alg, 'csspp'))
+    [Yt_pred, ~] = csspp_decode(Zt_pred, recover);
   else
     fprintf(1, 'ERROR, unrecognized coding scheme');
     return;

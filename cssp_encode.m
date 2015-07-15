@@ -7,7 +7,7 @@ function [Z, recover] = cssp_encode(Y, M, lambda)
     vt = v';
     vtk = vt(1:M,:);
     p = sum(vtk,1)  ./ sum(sum(vtk,1),2);
-    sum_p = 0;
+    sum_p = sum(p);
 
     C = [];
     used = zeros([1,size(Y,2)]);
